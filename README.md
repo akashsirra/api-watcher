@@ -51,3 +51,27 @@ Never commit API tokens, Telegram credentials, VAPID private keys, or other secr
 ## License
 
 MIT
+
+
+## Android / Play Store
+
+The Android app lives in `android/` and targets Android 16 (API 36). GitHub Actions builds both a debug APK and release AAB.
+
+The hosted MVP uses a Supabase Edge Function and Postgres database. The public app endpoints are:
+
+- `GET /functions/v1/api-watcher/sources`
+- `GET /functions/v1/api-watcher/changes`
+- `POST /functions/v1/api-watcher/check`
+
+The monitor workflow triggers a check every 30 minutes.
+
+### Release plan
+
+1. Build and test the Android AAB.
+2. Create the Play Console app and complete developer verification.
+3. Upload the AAB to internal testing.
+4. Complete the required closed test if the Play developer account is a new personal account.
+5. Prepare store listing, privacy policy and Data safety declarations.
+6. Apply for production access and roll out the production release.
+
+Privacy policy: [PRIVACY.md](./PRIVACY.md)
