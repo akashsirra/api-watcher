@@ -35,7 +35,12 @@ jobs:
           KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
         run: |
           test -n "$KEYSTORE_B64"
-          printf "%s" "$KEYSTORE_B64" | tr -d '[:space:]' | base64 --decode --ignore-garbage > android-release.jks
+          python3 - <<'PY'
+import base64, os, re
+s = re.sub(r'\\s+', '', os.environ['KEYSTORE_B64'])
+s += '=' * (-len(s) % 4)
+open('android-release.jks', 'wb').write(base64.b64decode(s, validate=False))
+PY
 
       - name: Build signed release APK
         env:
