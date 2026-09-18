@@ -11,7 +11,7 @@ import java.net.URL
 import kotlin.concurrent.thread
 
 class MainActivity : Activity() {
-    private val baseUrl = "https://api-watcher.example.com"
+    private val baseUrl = "https://gbukskuavtjnthblomsz.supabase.co/functions/v1/api-watcher"
     private lateinit var status: TextView
     private lateinit var list: LinearLayout
     private lateinit var refresh: Button
