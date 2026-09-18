@@ -1,16 +1,16 @@
 package com.akashsirra.apiwatcher
 
+import android.app.Activity
 import android.os.Bundle
 import android.graphics.Color
 import android.view.Gravity
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
     private val baseUrl = "https://api-watcher.example.com"
     private lateinit var status: TextView
     private lateinit var list: LinearLayout
