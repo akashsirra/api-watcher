@@ -37,11 +37,11 @@ jobs:
         run: |
           test -n "$KEYSTORE_B64"
           python3 - <<'PY'
-import base64, os, re
-s = re.sub(r'\\s+', '', os.environ['KEYSTORE_B64'])
-s += '=' * (-len(s) % 4)
-open('android-release.jks', 'wb').write(base64.b64decode(s, validate=False))
-PY
+          import base64, os, re
+          s = re.sub(r'\s+', '', os.environ['KEYSTORE_B64'])
+          s += '=' * (-len(s) % 4)
+          open('android-release.jks', 'wb').write(base64.b64decode(s, validate=False))
+          PY
 
       - name: Build signed release APK
         env:
