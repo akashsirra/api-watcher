@@ -9,13 +9,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm install
-      - run: npm run check
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      - name: Check monitored APIs
+        run: |
+          curl --fail --silent --show-error \
+            -X POST \
+            -H "Content-Type: application/json" \
+            "https://gbukskuavtjnthblomsz.supabase.co/functions/v1/api-watcher/check"
