@@ -1,3 +1,4 @@
+# Trigger rebuild after signing-secret refresh.
 name: Release Android APK
 
 on:
