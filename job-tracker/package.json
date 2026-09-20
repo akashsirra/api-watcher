@@ -1,0 +1,8 @@
+{
+  "name": "india-job-change-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "check": "node src/check.js" },
+  "dependencies": { "cheerio": "^1.1.2" }
+}
