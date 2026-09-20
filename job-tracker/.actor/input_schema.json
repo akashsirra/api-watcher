@@ -8,37 +8,27 @@
       "type": "array",
       "description": "Greenhouse company board names to scan.",
       "editor": "stringList",
-      "default": [
-        "airbnb",
-        "stripe",
-        "figma"
-      ]
+      "default": ["airbnb", "stripe", "figma"]
     },
     "level": {
       "title": "Experience level",
       "type": "string",
       "description": "Optional experience filter.",
       "editor": "select",
-      "enum": [
-        "ENTRY",
-        "MID",
-        "SENIOR"
-      ],
-      "enumTitles": [
-        "Entry",
-        "Mid",
-        "Senior"
-      ]
+      "enum": ["ENTRY", "MID", "SENIOR"],
+      "enumTitles": ["Entry", "Mid", "Senior"]
     },
     "location": {
       "title": "Location",
       "type": "string",
-      "description": "Optional location filter, for example Bangalore or Hyderabad."
+      "description": "Optional location filter.",
+      "editor": "textfield"
     },
     "changesOnly": {
       "title": "Changes only",
       "type": "boolean",
       "description": "Only return NEW, UPDATED, and CLOSED jobs.",
+      "editor": "checkbox",
       "default": true
     }
   }
