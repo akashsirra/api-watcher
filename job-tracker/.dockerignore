@@ -1,0 +1,7 @@
+node_modules
+.git
+storage
+data/jobs.json
+data/jobs.tmp.json
+.env
+*.log

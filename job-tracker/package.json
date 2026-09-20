@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": { "check": "node src/check.js" },
-  "dependencies": { "cheerio": "^1.1.2" }
+  "scripts": {
+    "scan": "node src/run.js",
+    "test": "node --test tests/*.test.js",
+    "actor": "node src/actor/main.js",
+    "start": "node src/actor/main.js"
+  },
+  "dependencies": {
+    "apify": "^3.7.2"
+  }
 }

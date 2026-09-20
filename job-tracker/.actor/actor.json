@@ -1,0 +1,9 @@
+{
+  "actorSpecification": 1,
+  "name": "india-job-change-tracker",
+  "title": "India Job Change Tracker",
+  "description": "Tracks India software engineering jobs from public Greenhouse ATS sources and reports new, updated, and closed positions.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "./input_schema.json"
+}

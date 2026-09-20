@@ -1,0 +1,45 @@
+{
+  "title": "India Job Change Tracker",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "companies": {
+      "title": "Companies",
+      "type": "array",
+      "description": "Greenhouse company board names to scan.",
+      "editor": "stringList",
+      "default": [
+        "airbnb",
+        "stripe",
+        "figma"
+      ]
+    },
+    "level": {
+      "title": "Experience level",
+      "type": "string",
+      "description": "Optional experience filter.",
+      "editor": "select",
+      "enum": [
+        "ENTRY",
+        "MID",
+        "SENIOR"
+      ],
+      "enumTitles": [
+        "Entry",
+        "Mid",
+        "Senior"
+      ]
+    },
+    "location": {
+      "title": "Location",
+      "type": "string",
+      "description": "Optional location filter, for example Bangalore or Hyderabad."
+    },
+    "changesOnly": {
+      "title": "Changes only",
+      "type": "boolean",
+      "description": "Only return NEW, UPDATED, and CLOSED jobs.",
+      "default": true
+    }
+  }
+}
