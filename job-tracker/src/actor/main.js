@@ -11,7 +11,7 @@ const level = input.level ?? null;
 const location = input.location ?? null;
 const changesOnly = input.changesOnly ?? true;
 
-const store = await Actor.openKeyValueStore("JOB_STATE");
+const store = await Actor.openKeyValueStore("job-state");
 
 const previous = await store.getValue("jobs") ?? {};
 const current = { ...previous };
