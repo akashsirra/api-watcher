@@ -1,6 +1,8 @@
 import { fetchProvider } from "./providers/greenhouse.js";
 import { filterJobs, normalizeJob } from "./pipeline.js";
 import { saveJobs } from "./store.js";
+import { candidate } from "./matching/candidate.js";
+import { matchJobs } from "./matching/decision.js";
 
 const companies = [
   { name: "airbnb", provider: "greenhouse", board: "airbnb" },
@@ -19,6 +21,7 @@ const companyArg = getArg("--company");
 const levelArg = getArg("--level");
 const locationArg = getArg("--location");
 const jsonMode = args.includes("--json");
+const matchMode = args.includes("--match");
 
 const selected = companyArg
   ? companies.filter(c =>
@@ -82,13 +85,19 @@ for (const company of selected) {
   }
 }
 
+let matchedJobs = displayJobs;
+
+if (matchMode) {
+  matchedJobs = await matchJobs(displayJobs, candidate);
+}
+
 const allChanges = saveJobs(
   stateJobs,
   successfulSources
 );
 
 const displayIds = new Set(
-  displayJobs.map(job => String(job.id))
+  matchedJobs.map(job => String(job.id))
 );
 
 const changes = allChanges.filter(
@@ -99,7 +108,7 @@ if (jsonMode) {
   console.log(JSON.stringify({
     generated_at: new Date().toISOString(),
     source_results: sourceResults,
-    jobs: displayJobs,
+    jobs: matchedJobs,
     changes
   }, null, 2));
 } else {
