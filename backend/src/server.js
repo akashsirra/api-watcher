@@ -34,6 +34,8 @@ app.post("/api/uptime/check",async(_,res)=>{
   catch(error){res.status(500).json({error:error.message});}
 });
 
+app.get("/api/monitors/:slug/checks",(req,res)=>{ const monitor=db.prepare("SELECT id FROM monitors WHERE slug=?").get(req.params.slug); if(!monitor) return res.status(404).json({error:"monitor not found"}); const hours=Math.min(Number(req.query.hours)||24,24*30); const since=new Date(Date.now()-hours*3600_000).toISOString(); res.json(db.prepare("SELECT checked_at,ok,status_code,latency_ms,error FROM uptime_checks WHERE monitor_id=? AND checked_at>=? ORDER BY checked_at ASC").all(monitor.id,since)); });
+
 app.get("/api/monitors/:slug",(req,res)=>{
   const monitor=db.prepare("SELECT id,slug,name,url,method,expected_status,timeout_ms,enabled,last_checked_at,last_status,last_latency_ms FROM monitors WHERE slug=?").get(req.params.slug);
   if(!monitor) return res.status(404).json({error:"monitor not found"});
