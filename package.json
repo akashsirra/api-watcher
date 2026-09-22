@@ -1,9 +1,9 @@
 {
   "name":"api-watcher",
-  "version":"0.1.0",
+  "version":"0.2.0",
   "private":true,
-  "description":"Monitor API changelogs and alert developers before changes break production.",
+  "description":"Monitor API changelogs and publish independently verified uptime badges.",
   "type":"module",
-  "scripts":{"start":"node backend/src/server.js","check":"node backend/src/check.js"},
+  "scripts":{"start":"node backend/src/server.js","check":"node backend/src/check.js","uptime:check":"node backend/src/uptime-check.js"},
   "dependencies":{"better-sqlite3":"^11.10.0","cheerio":"^1.1.2","express":"^5.1.0"}
 }
