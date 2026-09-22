@@ -27,6 +27,32 @@ CREATE TABLE IF NOT EXISTS changes (
   url TEXT NOT NULL,
   FOREIGN KEY(source_id) REFERENCES sources(id)
 );
+CREATE TABLE IF NOT EXISTS monitors (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  slug TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  url TEXT NOT NULL,
+  method TEXT NOT NULL DEFAULT 'GET',
+  expected_status INTEGER NOT NULL DEFAULT 200,
+  timeout_ms INTEGER NOT NULL DEFAULT 10000,
+  headers_json TEXT NOT NULL DEFAULT '{}',
+  body TEXT,
+  enabled INTEGER NOT NULL DEFAULT 1,
+  last_checked_at TEXT,
+  last_status TEXT,
+  last_latency_ms INTEGER
+);
+CREATE TABLE IF NOT EXISTS uptime_checks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  monitor_id INTEGER NOT NULL,
+  checked_at TEXT NOT NULL,
+  ok INTEGER NOT NULL,
+  status_code INTEGER,
+  latency_ms INTEGER,
+  error TEXT,
+  FOREIGN KEY(monitor_id) REFERENCES monitors(id)
+);
+CREATE INDEX IF NOT EXISTS idx_uptime_checks_monitor_time ON uptime_checks(monitor_id,checked_at);
 `);
 
 export function upsertSource(source){
