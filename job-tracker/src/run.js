@@ -112,12 +112,26 @@ if (jsonMode) {
     changes
   }, null, 2));
 } else {
-  console.log(`\nTotal India software jobs: ${displayJobs.length}`);
-  console.log(`Changes: ${changes.length}\n`);
+  console.log(`\nTotal India software jobs: ${matchedJobs.length}`);
+  console.log(`Changes: ${changes.length}`);
 
   for (const job of changes) {
     console.log(
       `[${job.status}] ${job.company} — ${job.title}`
     );
+  }
+
+  if (matchMode) {
+    console.log("\nJev match decisions:");
+    for (const job of matchedJobs) {
+      const match = job.match;
+      if (match?.error) {
+        console.log(`  [REVIEW] ${job.company} — ${job.title} — ${match.error}`);
+        continue;
+      }
+      const score = match.skill_fit == null ? "?" : match.skill_fit.toFixed(2);
+      const role = match.role_fit == null ? "?" : match.role_fit.toFixed(2);
+      console.log(`  [${match.action}] ${job.company} — ${job.title} | skill ${score}/4 | role ${role}`);
+    }
   }
 }
